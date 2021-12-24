@@ -13,6 +13,7 @@ const Protected = () => {
             <Route path="/user/dashboard" element={<Dashboard />} />
             <Route path="/user/register" element={<RegisterProduct />} />
             <Route path="/user/products" element={<UserViewProduct />} />
+            <Route path="*" element={<h1>Error 404</h1>} />
         </Routes>
     )
 }
