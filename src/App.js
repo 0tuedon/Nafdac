@@ -1,11 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import Main from './Main';
+import React from 'react'
+import Navigation from './components/Navigation'
+import Main from './Main'
 
-function App() {
+const App = () => {
   return (
-    <Main/>
-  );
+    <>
+      <Navigation/>
+      <Main />
+    </>
+  )
 }
 
-export default App;
+export default App

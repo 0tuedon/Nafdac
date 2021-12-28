@@ -1,0 +1,78 @@
+
+/* Stylings for the home page */
+.home-page{
+    position: relative;
+    background-image: linear-gradient(to right bottom,rgba(5, 255, 109,0.3),rgba(5, 148, 41, 0.5)),url(../../assets/image/homepagedrugs.jpg);
+    height: 100vh;
+    background-size: cover;
+}
+
+/* Postions the container close to the Center */
+.home-page__text-box
+{
+    position: absolute;
+    top: 30vh;
+    left: 20vw;
+}
+/* Gives the Heading a Nice Font Color And Background */
+.home-page__text-box--header{
+    color: rgb(167, 225, 252);
+    background-color:rgba(5, 148, 41, 0.5);
+    
+}
+/* Beautifys and changes how the button looks on wider screen */
+.home-page__button
+{
+    position: relative;
+}
+.button1{
+    position: relative;
+    left: 35%;
+    display: inline-block;
+    animation-name: MoveUpButton;
+    animation-timing-function: ease-in;
+    animation-duration: .5s;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Animation to move the button up on Loading */
+@keyframes MoveUpButton
+{
+    0%{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100%{
+         transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* For responsiveness the following buttons and elements are styled for user experience */
+@media only screen and (max-width:550px) {
+.button1{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .home-page__text-box
+    {
+        left: 10vw;
+    }
+    .home-page__text-box--header{
+        font-size: 16px;
+    }
+}
+
+/* On wider screens where there's a lag */
+@media only screen and (max-width:850px) {
+     /* .home-page__text-box
+    {
+        left: 10vw;
+    } */
+     .home-page__text-box--header{
+        font-size: 25px;
+    }
+}
