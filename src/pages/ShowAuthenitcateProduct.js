@@ -1,11 +1,11 @@
 import React from 'react'
 
 const ShowAuthenitcateProduct = () => {
-    return (
+  return (
         <div>
-            
+
         </div>
-    )
+  )
 }
 
 export default ShowAuthenitcateProduct

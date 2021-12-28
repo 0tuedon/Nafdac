@@ -1,11 +1,11 @@
 import React from 'react'
 
 const UserViewProduct = () => {
-    return (
+  return (
         <div>
-            
+
         </div>
-    )
+  )
 }
 
 export default UserViewProduct

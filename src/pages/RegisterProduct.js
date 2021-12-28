@@ -1,11 +1,11 @@
 import React from 'react'
 
 const RegisterProduct = () => {
-    return (
+  return (
         <div>
-            
+
         </div>
-    )
+  )
 }
 
 export default RegisterProduct

@@ -1,11 +1,10 @@
 import React from 'react'
 
 const AuthenticateProduct = () => {
-    return (
+  return (
         <div>
-            
         </div>
-    )
+  )
 }
 
 export default AuthenticateProduct
