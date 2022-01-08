@@ -1,9 +1,12 @@
 import React from 'react'
+import ViewMoreCard from '../components/ViewMoreCard'
 
 const UserViewProduct = () => {
   return (
-        <div>
-
+        <div className='md:flex m-3 flex-row justify-between'>
+          <ViewMoreCard/>
+          <ViewMoreCard />
+          <ViewMoreCard />
         </div>
   )
 }

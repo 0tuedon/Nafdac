@@ -12,7 +12,7 @@ const Main = () => {
             <Route path="/" element={<Home/>} />
             <Route path="/login" element={<LoginAccount />} />
             <Route path="/products/verify" element={<ShowAuthenitcateProduct/>} />
-            <Route path="/products/search" element={< SearchProduct />} />
+            <Route path="/products/search" element={<SearchProduct />} />
             <Route path="*" element={<Protected/>} />
         </Routes>
   )

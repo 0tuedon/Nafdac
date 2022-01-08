@@ -8,7 +8,7 @@ const LoginAccount = () => {
         <div className="flex p-9 justify-center items-center">
             <form>
                 {LoginArray.map(data => <Input key={data.key} product={data}/>)}
-                <Button1 class="w-full" text="Login"/>
+                <Button1 class="w-full px-2 py-1 text-lg" text="Login"/>
             </form>
         </div>
   )
