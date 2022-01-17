@@ -12,7 +12,7 @@ const SearchProduct = () => {
   const onSubmit = (e) => {
     e.preventDefault()
     console.log(value)
-    axios.get('http://nafdac-backend.herokuapp.com/product', {
+    axios.get('https://nafdac-backend.herokuapp.com/product', {
       params: {
         Nafdac: value
       }

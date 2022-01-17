@@ -9,7 +9,7 @@ const UserViewProduct = () => {
   console.log(product)
   useEffect(() => {
     setLoading(true)
-    axios.get('http://nafdac-backend.herokuapp.com/products',
+    axios.get('https://nafdac-backend.herokuapp.com/products',
       {
         headers:
       { 'Access-Control-Allow-Origin': '*' }
@@ -27,7 +27,7 @@ const UserViewProduct = () => {
     }
   }, [])
   return (
-        <div className='md:flex m-3 flex-row justify-between'>
+        <div className='block md:flex m-3 md:flex-row md:justify-between'>
         {loading && <Loading/>}
           {product.map((data, index) =>
             <ViewMoreCard
