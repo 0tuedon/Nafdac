@@ -12,8 +12,7 @@ const ViewMoreCard = (props) => {
                 <h4>{props.nafdac}</h4>
                 <div>
                   <span>
-                      Manufacturing Date:
-            <time>{props.date}</time>
+                      Manufacturing Date: <time> {props.date} </time>
                   </span>
                 </div>
               <div>

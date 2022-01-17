@@ -44,7 +44,7 @@ const NewProduct = () => {
                           <span>{pageNumber} / 4</span>
                       </div>
                       <div className=' text-center mt-3'>
-                          <button className='bg-white hover:bg-gray-300 w-full active:bg-gray-700 text-green-700 font-bold py-2 px-4 rounded focus:outline-none focusshadow-outline' type="button">Create Product</button>
+                          {pageNumber === 4 && <button className='bg-white hover:bg-gray-300 w-full active:bg-gray-700 text-green-700 font-bold py-2 px-4 rounded focus:outline-none focusshadow-outline' type="button">Create Product</button>}
                       </div>
                     </form>
                     <div className='flex justify-center'>
