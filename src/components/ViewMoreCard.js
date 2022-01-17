@@ -1,24 +1,24 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const ViewMoreCard = () => {
+const ViewMoreCard = (props) => {
   return (
         <div className='flex p-5 m-3 md:m-2 flex-col justify-center items-start text-left bg-green-400'>
             <div className='name'>
-                <h2>Company Name</h2>
-                <h3>Product Name</h3>
+                <h2>{props.company}</h2>
+                <h3>{props.product}</h3>
             </div>
             <div className='product--details'>
-                <h4>Nafac No</h4>
+                <h4>{props.nafdac}</h4>
                 <div>
                   <span>
                       Manufacturing Date:
-                      <time>21st October 2022</time>
+            <time>{props.date}</time>
                   </span>
                 </div>
               <div>
                   <span>
-                      Manufacturing Date:
-                      <time>21st October 2022</time>
+                      Product Category:{props?.category}
                   </span>
               </div>
             </div>
@@ -26,4 +26,13 @@ const ViewMoreCard = () => {
         </div>
   )
 }
+
+ViewMoreCard.propTypes = {
+  company: PropTypes.string,
+  date: PropTypes.string,
+  product: PropTypes.string,
+  nafdac: PropTypes.string,
+  category: PropTypes.string
+}
+
 export default ViewMoreCard
