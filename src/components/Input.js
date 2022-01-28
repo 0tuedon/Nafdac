@@ -3,7 +3,14 @@ import React from 'react'
 
 const Input = (props) => {
   const inputChange = (e) => {
-    props.onChange(e.target.value)
+    const { value, name } = e.target
+    props?.onChange(value)
+    props?.addProduct(prev => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
   }
   const { product } = props
   return (
