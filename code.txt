@@ -1,0 +1,711 @@
+index.js
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import { BrowserRouter } from 'react-router-dom'
+
+ReactDOM.render(
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>
+  ,
+  document.getElementById('root')
+)
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
+App.js
+
+import React from 'react'
+import Navigation from './components/Navigation'
+import Main from './Main'
+
+const App = () => {
+  return (
+    <>
+      <Navigation/>
+      <Main />
+    </>
+  )
+}
+
+export default App
+
+
+Main.js 
+
+import React from 'react'
+import { Route, Routes } from 'react-router'
+import Protected from './containers/Protected'
+import Home from './pages/Home'
+import LoginAccount from './pages/LoginAccount'
+import NewProduct from './pages/NewProduct'
+import SearchProduct from './pages/SearchProduct'
+import ShowAuthenitcateProduct from './pages/ShowAuthenitcateProduct'
+import UserViewProduct from './pages/UserViewProduct'
+
+const Main = () => {
+  return (
+        <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/login" element={<LoginAccount />} />
+            <Route path="/user/register" element={<NewProduct/>} />
+            <Route path="/products/verify" element={<ShowAuthenitcateProduct/>} />
+            <Route path="/products/search" element={<SearchProduct />} />
+            <Route path="/user/products" element={<UserViewProduct />} />
+            <Route path="*" element={<Protected/>} />
+        </Routes>
+  )
+}
+
+export default Main
+
+
+index.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body
+{
+    font-size: 1rem;
+}
+
+
+Button.js 
+
+/* eslint-disable react/prop-types */
+import React from 'react'
+import '../styles/components/Button.css'
+const Button1 = (props) => {
+  return (
+        <button onClick={props.onClick} className={`${props.class} bg-green-500 hover:bg-green-700 text-white font-bold py-5 px-4 rounded`}>
+            {props.text}
+        </button>
+  )
+}
+
+export default Button1
+
+
+Dropdown.js 
+
+import React from 'react'
+import '../styles/components/DropDown.css'
+const DropDown = () => {
+  return (
+    <div className=" md:hidden" id="mobile-menu">
+      <div className="px-2 pt-2 pb-3 space-y-1">
+        <a href="/user/register" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Register Product</a>
+
+        <a href="/products/search" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Search Product</a>
+
+        <a href="/products/verify" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Verify Product</a>
+
+        <a href="/user/products/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">View All Products</a>
+
+        <a href="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
+      </div>
+    </div>
+  )
+}
+
+export default DropDown
+
+
+import React from 'react'
+
+const HoverProfile = () => {
+  return (
+        <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
+            <a href="/" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-0">Your Profile</a>
+            <a href="/" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</a>
+            <a href="/" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Sign out</a>
+        </div>
+  )
+}
+
+export default HoverProfile
+
+
+/* eslint-disable react/prop-types */
+import React from 'react'
+
+const Input = (props) => {
+  const inputChange = (e) => {
+    const { value, name } = e.target
+    props?.onChange(value)
+    props?.addProduct(prev => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
+  }
+  const { product } = props
+  return (
+        <>
+            <div className='mb-4'>
+                <label htmlFor={product.id}></label>
+                <input className='shadow appearance-none border rounded w-full py-2
+                      px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"'
+                    id={product.id}
+                    value={props.value}
+                    onChange={inputChange}
+                    type={product.type} placeholder={product.placeholder} name={product.name} />
+            </div>
+        </>
+  )
+}
+
+export default Input
+
+
+import React from 'react'
+import loader from '../assets/loader.svg'
+
+export const Loading = () => {
+  return (
+        <img src={loader} alt='spiner' className="mx-auto" />
+  )
+}
+
+
+import React from 'react'
+import '../styles/components/Navbar.css'
+const NavBar = () => {
+  return (
+        <nav className="bg-green-800">
+            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                <div className="relative flex items-center justify-between h-16">
+                  <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                        <div className="flex-shrink-0 flex items-center">
+                            <img className="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow" />
+                            <img className="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
+                        </div>
+                        <div className="hidden sm:block sm:ml-6">
+                            <div className="flex space-x-4">
+                                <a href="/user/dashboard" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
+                                <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                                <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                                <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            <span className="sr-only">View notifications</span>
+
+                            <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                        </button>
+
+                        <div className="ml-3 relative">
+                            <div>
+                                <button type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                    <span className="sr-only">Open user menu</span>
+                                    <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                </button>
+                            </div>
+                            <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
+                                <a href="/" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-0">Your Profile</a>
+                                <a href="/" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</a>
+                                <a href="/" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-2">Sign out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="sm:hidden" id="mobile-menu">
+                <div className="px-2 pt-2 pb-3 space-y-1">
+                    <a href="/" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
+
+                    <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
+
+                    <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+
+                    <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+                </div>
+            </div>
+        </nav>
+  )
+}
+
+export default NavBar
+
+
+import React from 'react'
+import PropTypes from 'prop-types'
+
+const Result = props => {
+  const { product } = props
+  return (
+        <section className='mt-3 flex flex-row justify-center items-center '>
+            <div className=''>
+              <h3>Name: {product?.productName}</h3>
+              <h3>Company Name: {product?.owner} </h3>
+              <div>
+                  <h5>Product Nafdac: {product?.productNafdac} </h5>
+                  <h5>Product Category: {product?.productCategory} </h5>
+              </div>
+              <div><time>Manufacturing Date: {product?.dateOfRegistration}</time></div>
+            </div>
+        </section>
+  )
+}
+
+Result.propTypes = {
+  product: PropTypes.object
+}
+
+export default Result
+
+import React from 'react'
+import PropTypes from 'prop-types'
+
+const ViewMoreCard = (props) => {
+  return (
+        <div className='flex p-5 m-3 md:m-2 flex-col justify-center items-start text-left bg-green-400'>
+            <div className='name'>
+                <h2>{props.company}</h2>
+                <h3>{props.product}</h3>
+            </div>
+            <div className='product--details'>
+                <h4>{props.nafdac}</h4>
+                <div>
+                  <span>
+                      Manufacturing Date: <time> {props.date} </time>
+                  </span>
+                </div>
+              <div>
+                  <span>
+                      Product Category:{props?.category}
+                  </span>
+              </div>
+            </div>
+            <button className='bg-white w-full m-2 py-2 px-3 rounded-xl hover:shadow-xl '>View More</button>
+        </div>
+  )
+}
+
+ViewMoreCard.propTypes = {
+  company: PropTypes.string,
+  date: PropTypes.string,
+  product: PropTypes.string,
+  nafdac: PropTypes.string,
+  category: PropTypes.string
+}
+
+export default ViewMoreCard
+
+import React from 'react'
+import { Route, Routes } from 'react-router'
+import AdminLogin from '../pages/AdminLogin'
+import AuthenticateProduct from '../pages/AuthenticateProduct'
+import Dashboard from '../pages/Dashboard'
+import NewProduct from '../pages/NewProduct'
+import RegisterManufacturer from '../pages/RegisterManufacturer'
+import UserViewProduct from '../pages/UserViewProduct'
+
+const Protected = () => {
+  return (
+        <Routes>
+            <Route path="/admin" element={<AdminLogin/>} />
+            <Route path="/admin/authenticate" element={<AuthenticateProduct />} />
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/register" element={<NewProduct/>} />
+            <Route path="/admin/products" element={<UserViewProduct />} />
+            <Route path="/admin/manufacturer/create" element={<RegisterManufacturer />} />
+            <Route path="*" element={<h1>Error 404</h1>} />
+        </Routes>
+  )
+}
+
+export default Protected
+
+
+/*style*/
+
+#mobile-menu 
+{
+    animation-name: DropDown;
+    animation-timing-function: linear;
+    animation-duration: .5s;
+}
+
+
+/* Pages */
+
+
+import React from 'react'
+import { LoginArray } from '../utils/data/LoginInput'
+import { useNavigate } from 'react-router'
+import Input from '../components/Input'
+import Button1 from '../components/Buttons'
+const AdminLogin = () => {
+  const navigate = useNavigate()
+  const onClick = () => {
+    navigate('/admin/dashboard')
+  }
+  return (
+        <div className="flex p-9 justify-center items-center">
+            <form>
+                {LoginArray.map(data => <Input key={data.key} product={data} />)}
+                <Button1 class="w-full px-2 py-1 text-lg" text="Login" onClick={onClick} />
+            </form>
+        </div>
+  )
+}
+
+export default AdminLogin
+
+
+
+import React from 'react'
+import { useNavigate } from 'react-router'
+import Button from '../components/Buttons'
+const Dashboard = () => {
+  const navigate = useNavigate()
+  const onClickPath = (path) => {
+    navigate(path)
+  }
+  return (
+        <div className='flex flex-col justify-between items-center gap-y-4'>
+          <h2 className='text-lg font-semibold'>Admin Page</h2>
+          <Button onClick={() => { onClickPath('/admin/manufacturer/create') }} class="w-2/4" text="Create a Manufacturer" />
+          <Button class="w-2/4" onClick={() => { onClickPath('/admin/manufacturer') }} text="See all Manufacturer" />
+          <Button class="w-2/4" onClick={() => { onClickPath('/admin/verify') }} text="Verify a Product" />
+          <Button class="w-2/4" onClick={() => { onClickPath('/user/products') } } text="See all Products" />
+        </div>
+  )
+}
+
+export default Dashboard
+
+
+/* Home */
+
+import React from 'react'
+import Button1 from '../components/Buttons'
+import '../styles/pages/home.css'
+
+const Home = () => {
+  return (
+        <div className='home-page'>
+            <div className='home-page__text-box'>
+                <div className='home-page__text-box--header mb-3 text-center text-4xl px-2 py-4 font-bold rounded'>
+                  <h1>WELCOME TO THE NAFDAC E-PORTAL</h1>
+                </div>
+                <div className='home-page__button'>
+                  <Button1 text="GET STARTED" class='button1 rounded'></Button1>
+                </div>
+            </div>
+        </div>
+  )
+}
+
+export default Home
+
+/* Login Account */ 
+
+
+import React from 'react'
+import { LoginArray } from '../utils/data/LoginInput'
+import Input from '../components/Input'
+import Button1 from '../components/Buttons'
+const LoginAccount = () => {
+  return (
+        <div className="flex p-9 justify-center items-center">
+            <form>
+                {LoginArray.map(data => <Input key={data.key} product={data}/>)}
+                <Button1 class="w-full px-2 py-1 text-lg" text="Login"/>
+            </form>
+        </div>
+  )
+}
+
+export default LoginAccount
+
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'
+import Input from '../components/Input'
+import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
+import { ProductArray } from '../utils/data/ProductInput'
+
+const NewProduct = () => {
+  const [pageNumber, setPageNumber] = useState(1)
+  const [error, setError] = useState(false)
+  const increase = (c) => {
+    if (c === 0) {
+      setPageNumber(prev => {
+        if (prev >= 2) {
+          setError(true)
+          return prev
+        } else {
+          setError(false)
+          return prev + 1
+        }
+      })
+    } else {
+      setPageNumber(prev => {
+        if (prev <= 1) {
+          setError(true)
+          return 1
+        } else {
+          setError(false)
+          return prev - 1
+        }
+      })
+    }
+  }
+  const filteredArrayProduct = ProductArray.slice((pageNumber * 5) - 5, pageNumber * 5)
+  const [product, setProduct] = useState({})
+  return (
+        <div>
+            <div>
+                <h1 className=' text-4xl sm:text-6xl font-semibold text-center'> Create A New Product</h1>
+            </div>
+            <section className='w-full mt-4 flex justify-center'>
+                <div className='form-control w-full max-w-lg'>
+                    <form className='bg-green-700 w-full shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+                      {filteredArrayProduct.map(product => <Input onChange={() => {}} addProduct={setProduct} key={product.key} product={product}/>)}
+                      <div className='text-center text-gray-300 text-xl'>
+                          <span>{pageNumber} / 2</span>
+                      </div>
+                      <div className=' text-center mt-3'>
+                          {pageNumber === 2 && <button className='bg-white hover:bg-gray-300 w-full active:bg-gray-700 text-green-700 font-bold py-2 px-4 rounded focus:outline-none focusshadow-outline' type="button">Create Product</button>}
+                      </div>
+                    </form>
+                    <div className='flex justify-center'>
+                      <div onClick={increase} className={'bg-black cursor-pointer  rounded-full text-green-700 p-3 mr-4 text-4xl'}>
+                            <AiOutlineCaretLeft/>
+                        </div>
+            <div onClick={increase.bind(this, 0)} className={pageNumber === 2 ? 'cursor-not-allowed bg-black rounded-full p-3 text-green-700 ml-3 text-4xl' : 'bg-black cursor-pointer rounded-full p-3 text-green-700 ml-3 text-4xl'}>
+                            <AiOutlineCaretRight />
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+  )
+}
+
+export default NewProduct
+
+import React, { useState } from 'react'
+import Button1 from '../components/Buttons'
+import Input from '../components/Input'
+import { ManufacturerAdd } from '../utils/data/ManufacturerAdd'
+
+const RegisterManufacturer = () => {
+  const [addManufacturer, setAddManufacturer] = useState({})
+  console.log(addManufacturer)
+  return (
+        <div className='flex flex-row justify-center item-center'>
+      <div className='w-2/4'>
+        {ManufacturerAdd.map(data => <Input state={setAddManufacturer} onChange={() => {}} key={data.key} product={data} />)}
+        <Button1 text="Create Manufacturer" onClick={() => { }} />
+      </div>
+        </div>
+  )
+}
+
+export default RegisterManufacturer
+
+
+
+import React, { useState } from 'react'
+import Input from '../components/Input'
+import axios from 'axios'
+import Result from '../components/Result'
+
+const SearchProduct = () => {
+  const [value, setValue] = useState('')
+  const [product, setProduct] = useState({})
+  const onChange = (search) => {
+    setValue(search)
+  }
+  const onSubmit = (e) => {
+    e.preventDefault()
+    console.log(value)
+    axios.get('https://nafdac-backend.herokuapp.com/product', {
+      params: {
+        Nafdac: value
+      }
+    })
+      .then(res => {
+        console.log(res)
+        setProduct(res.data.product)
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+  const Search =
+    {
+      name: 'product',
+      key: 1,
+      placeholder: 'Enter Nafdac No or Name',
+      id: 'product',
+      type: 'text'
+    }
+  return (
+      <>
+          <div>
+              <h1 className=' text-4xl sm:text-6xl font-semibold text-center'> Search Product</h1>
+          </div>
+          <section className='w-full mt-4 flex justify-center'>
+              <div className='form-control w-full max-w-lg'>
+                  <form onSubmit={onSubmit} className='bg-green-700 w-full shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+                      <Input key={Search.key}
+                      value={value}
+                      onChange={onChange} product={Search} />
+                      <div className=' text-center mt-3'>
+                          <button type="submit" className='bg-white hover:bg-gray-300 w-full active:bg-gray-700 text-green-700 font-bold py-2 px-4 rounded focus:outline-none focusshadow-outline'>Search Product</button>
+                      </div>
+                  </form>
+              </div>
+          </section>
+          <Result
+              product={product}
+          />
+      </>
+  )
+}
+
+export default SearchProduct
+
+
+import React, { useState } from 'react'
+import axios from 'axios'
+import Input from '../components/Input'
+const ShowAuthenitcateProduct = () => {
+  const [value, setValue] = useState('')
+  const [product, setProduct] = useState({})
+  const [show, setShow] = useState(false)
+  const onChange = (search) => {
+    setValue(search)
+  }
+  const authenticate =
+  {
+    name: 'username',
+    key: 1,
+    placeholder: 'Enter Nafdac No',
+    id: 'Nafdac',
+    type: 'text'
+  }
+  const onSubmit = (e) => {
+    console.log(value)
+    e.preventDefault()
+    axios.get('https://nafdac-backend.herokuapp.com/product', {
+      params: {
+        Nafdac: value
+      }
+    })
+      .then(res => {
+        console.log(res)
+        setProduct(res.data.product)
+        setShow(true)
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+  return (
+        <div>
+      <div>
+        <h1 className=' text-4xl sm:text-6xl font-semibold text-center'> Check Verification</h1>
+      </div>
+      <section className='w-full mt-4 flex justify-center'>
+        <div className='form-control w-full max-w-lg'>
+          <form onSubmit={onSubmit} className='bg-green-700 w-full shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+            <Input key={authenticate.key} value={value} onChange={onChange} product={authenticate} />
+            <div className=' text-center mt-3'>
+              <button className='bg-white hover:bg-gray-300 w-full active:bg-gray-700 text-green-700 font-bold py-2 px-4 rounded focus:outline-none focusshadow-outline' type="submit">Check Verification</button>
+            </div>
+          </form>
+        </div>
+      </section>
+      {show ? <h1> {product?.isVerfied ? 'Verified' : 'Not Verified'} </h1> : null} <h1></h1>
+    </div>
+  )
+}
+
+export default ShowAuthenitcateProduct
+
+
+
+import React, { useEffect, useState } from 'react'
+import ViewMoreCard from '../components/ViewMoreCard'
+import { Loading } from '../components/Loading'
+import axios from 'axios'
+
+const UserViewProduct = () => {
+  const [product, setProduct] = useState([])
+  const [loading, setLoading] = useState(true)
+  console.log(product)
+  useEffect(() => {
+    setLoading(true)
+    axios.get('https://nafdac-backend.herokuapp.com/products',
+      {
+        headers:
+      { 'Access-Control-Allow-Origin': '*' }
+      })
+      .then(res => {
+        setLoading(false)
+        setProduct(res.data.product)
+      })
+      .catch(err => {
+        setLoading(false)
+        console.error(err)
+      })
+    return () => {
+      setProduct([])
+    }
+  }, [])
+  return (
+        <div className='block md:flex m-3 md:flex-row md:justify-between'>
+        {loading && <Loading/>}
+          {product.map((data, index) =>
+            <ViewMoreCard
+            key={index}
+            product={data.productName}
+            company={data.owner}
+            nafdac={data.productNafdac}
+            category={data.productType}
+            date={data.dateofRegistration}
+            id={data.id}
+            />
+          )}
+        </div>
+  )
+}
+
+export default UserViewProduct
+
+
+
+@keyframes DropDown 
+{
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+

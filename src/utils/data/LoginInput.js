@@ -1,6 +1,6 @@
 export const LoginArray = [
   {
-    name: 'username',
+    name: 'user',
     key: 1,
     placeholder: 'Enter username',
     id: 'company',
